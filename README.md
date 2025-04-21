@@ -2,6 +2,24 @@
 
 ---
 
+## 🎨 Color Palette – Logo-Based
+
+### ✅ Light Theme
+- **Primary Color**: Dark Blue
+- **Secondary Color**: Royal Blue
+- **Accent Color**: Sky Blue
+- **Background**: White
+- **Text**: Grayish Blue or Black
+
+### 🌙 Dark Theme
+- **Primary Color**: Royal Blue
+- **Secondary Color**: Sky Blue
+- **Accent Color**: White
+- **Background**: Dark Blue / Very Dark Navy
+- **Text**: Light Gray / White
+
+---
+
 ## 1. Home Page (`/`)
 
 - **Club Name & Logo**
@@ -67,10 +85,8 @@
   - Name  
   - Email  
   - Message  
-  ➤ _Optionally connected to_:
-    - [FormSubmit](https://formsubmit.co/)
-    - Google Forms
-    - Netlify Forms
+  - Google Forms
+  - Netlify Forms
 
 - **Club Email + Social Links**
 
