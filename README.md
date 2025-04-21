@@ -104,7 +104,7 @@
 
 ## 🛠 Tech Stack & Tools
 
-- **Framework**: React + Vite + Javascript
+- **Framework**: React + Vite
 - **Styling**: Tailwind CSS (clean, fast, responsive)  
 - **Hosting**: GitHub Pages / Vercel (static hosting)  
 - **Deployment**: CI/CD via GitHub Actions or Vercel  
