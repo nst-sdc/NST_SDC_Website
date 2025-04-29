@@ -1,13 +1,23 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, Github, Linkedin, Instagram, MessageSquare } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
+import { z } from "zod"
+import axios from "axios"
+import { Toaster } from "@/components/ui/toaster"
+
+//schema for Contact Form ... ofcourse you can update it later :)
+const contactSchema  = z.object({
+  name : z.string().min(1, "Name must be larger than 1 charcher").max(25, "Name must be smaller than 25 characters"),
+  email: z.string().email("Invalid email address"),
+  message : z.string().min(1, "Message must be larger than 1 charcher").max(500, "Message must be smaller than 500 characters"),
+})
+//as per you code, i set it like that, later on you can change it to zodResolver which is more efficient and better way to handle validation in react-hook-form :)
 
 export default function ContactPage() {
   const { toast } = useToast()
@@ -24,22 +34,44 @@ export default function ContactPage() {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate form submission
-    // In a real app, you would send this data to a form handling service
-    setTimeout(() => {
-      toast({
-        title: "Message sent!",
-        description: "We'll get back to you as soon as possible.",
-      })
-      setFormData({ name: "", email: "", message: "" })
-      setIsSubmitting(false)
-    }, 1500)
-  }
+    e.preventDefault();
+    setIsSubmitting(true);
+  
+    try {
+      contactSchema.parse(formData); // Validation before making the request
+      const response = await axios.post("http://localhost:5000/contactForm", formData);
+      console.log(response.data);
+  
+      if (response.status === 200) {
+        toast({
+          title: "Message sent!",
+          description: "We'll get back to you as soon as possible.",
+        });
+        const mailtoLink = `mailto:support@nstsdc.org?subject=Contact Form Submission&body=Name: ${formData.name}%0AEmail: ${formData.email}%0AMessage: ${formData.message}`;
+        window.location.href = mailtoLink;  
+      }
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error: any) {
+      if (error.name === "ZodError") {
+        toast({
+          title: "Validation Error",
+          variant: "destructive",
+        });
+      } else if (axios.isAxiosError(error)) {
+        toast({
+          title: "Error",
+          description: "Something went wrong while sending the message.",
+          variant: "destructive",
+        });
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
+    <>
+    <Toaster/>
     <div className="container mx-auto py-16 px-4">
       <div className="text-center mb-12">
         <div className="inline-flex items-center justify-center px-3 py-1 mb-3 text-sm font-medium rounded-full bg-primary/10 text-primary">
@@ -177,5 +209,6 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
+    </>
   )
 }
