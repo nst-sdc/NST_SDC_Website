@@ -112,3 +112,5 @@
   - FormSubmit / Google Forms / Netlify Forms (No backend needed)
 
 ---
+
+### New Contributors are welcome to submit new PR to improve the website
