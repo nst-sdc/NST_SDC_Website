@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Github, Linkedin, Instagram, Youtube } from "lucide-react"
-import { FaDiscord } from "react-icons/fa" // Correct import for FaDiscord
+import { FaDiscord } from "react-icons/fa"
 import Logo from "@/components/logo"
 
 export default function Footer() {
@@ -59,7 +59,7 @@ export default function Footer() {
                 <FaDiscord className="h-5 w-5" />
               </a>
               <a
-                href="https://youtube.com/@nstsdc"
+                href="https://www.youtube.com/@nstsdc-2028"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-card hover:bg-primary/10 transition-colors"
